@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Friendly
   - Fuel
+  - Friendly
   layers:
   - Default
   - TransparentFX
