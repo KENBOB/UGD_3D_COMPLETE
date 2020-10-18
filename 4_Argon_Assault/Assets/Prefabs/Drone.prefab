@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3381673327088298874}
   - component: {fileID: 198659414560762636}
   m_Layer: 0
-  m_Name: Part_10
+  m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,6 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyDeathFX: {fileID: 0}
+  parent: {fileID: 0}
+  scorePerHit: 12
+  hitPoints: 10
 --- !u!65 &198659414560762636
 BoxCollider:
   m_ObjectHideFlags: 0

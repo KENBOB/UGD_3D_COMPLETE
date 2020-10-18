@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     [Tooltip("In ms^1")][SerializeField] float controlSpeed = 40f;
     [Tooltip("In m")][SerializeField] float xMinClampRange = -25.0f, xMaxClampRange = 25.0f;
     [Tooltip("In m")][SerializeField] float yMinClampRange = -11.0f, yMaxClampRange = 11.0f;
+    [SerializeField] GameObject[] guns;
 
     [Header("Screen-position Based")]
     [SerializeField] float positionPitchFactor = -3f;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour {
         if (isControlEnabled) {
         TranslationMovementControls();
         RotationMovementControls();
+        ProcessFiring();
         }
     }
 
@@ -76,5 +78,24 @@ public class PlayerController : MonoBehaviour {
 
         //Rotating the ship based on calculations
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+    }
+
+    void ProcessFiring() {
+        if (CrossPlatformInputManager.GetButton("Fire1")) {
+            print("Firing " + guns.Length + " guns");
+            ActivateGuns();
+        } else {
+            DeactivateGuns();
+        }
+    }
+    void ActivateGuns() {
+        foreach (GameObject gun in guns) {
+            gun.SetActive(true);
+        }
+    }
+    void DeactivateGuns() {
+        foreach (GameObject gun in guns) {
+            gun.SetActive(false);
+        }
     }
 }

@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] Transform parent;
     
     [SerializeField] int scorePerHit = 12;
+    [SerializeField] int hitPoints = 10;
     ScoreBoard scoreBoard;
 
     //Create BoxColliders in code for all enemies containing this script
@@ -26,13 +27,25 @@ public class Enemy : MonoBehaviour {
         boxCollider.isTrigger = false;
     }
 
-    //Detect when enemy object is hit and unproject with death animation at its position
+    //Detect when enemy object is hit and if the health is at 0, execute KillEnemy routine
     void OnParticleCollision(GameObject other) {
         print("Particles collided with enemy" + gameObject.name);
-        
+        ProcessHit();
+        if (hitPoints <= 1) {
+            KillEnemy();
+        }
+    }
+
+    //Update hits dealt to enemies
+    private void ProcessHit() {
         //Allows for user to change score on each enemy as needed
         scoreBoard.ScoreHit(scorePerHit);
-        
+        hitPoints = hitPoints - 1;
+        //todo consider hit FX function
+    }
+
+    //Destroy enemy and project death animation at its position
+    private void KillEnemy() {
         //Initiate deathFX particles at its position in the world and do not rotate
         GameObject FXAnimation = Instantiate(EnemyDeathFX, transform.position, Quaternion.identity);
         
