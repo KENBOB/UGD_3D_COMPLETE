@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour {
         isControlEnabled = false;
     }
 
-    //Movement Controls
+    //MOVEMENT CONTROLS:
+
     //Screen Movement
     private void TranslationMovementControls() {
         horizontalThrowInput = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour {
 
         //Change only x horizontal position and leave y and z alone
         transform.localPosition = new Vector3(xPosClamped, transform.localPosition.y, transform.localPosition.z);
+        
         //Change only y horizontal position and leave x and z alone
         transform.localPosition = new Vector3(transform.localPosition.x, yPosClamped, transform.localPosition.z);
         

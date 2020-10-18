@@ -8,7 +8,8 @@ public class MusicPlayer : MonoBehaviour {
     private void Awake() {
         int numMusicPlayers = FindObjectsOfType<MusicPlayer>().Length;
         print("Number of music players in thise scene " + numMusicPlayers);
-        //Call Scene Loader
+        
+        //Call Scene Loader script if it is attached to the same object
         SendMessage("startGame");
 
         //Checks for multiple music bots and deletes extras
