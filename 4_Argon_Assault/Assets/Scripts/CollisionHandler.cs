@@ -16,7 +16,6 @@ public class CollisionHandler : MonoBehaviour {
 
         //Set explosion animation to visible on the screen
         PlayerDeathFX.SetActive(true);
-        
     }
 
     //Freezes controls, calls scene loader
