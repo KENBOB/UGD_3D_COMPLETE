@@ -10,9 +10,21 @@ public class CollisionHandler : MonoBehaviour {
     [Tooltip("In seconds")][SerializeField] float LevelLoadDelay = 2f;
 
     //Trigger Physics Detection and calls explosion animation
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider collision) {
         print("Player triggered something");
-        StartDeathSequence();
+        switch(collision.gameObject.tag){
+                case "Friendly":
+                    // do nothing
+                    print("OK");
+                    break;
+                // case "Finish":
+                //     StartSuccessSequence();
+                //     break;
+                default:
+                    StartDeathSequence();
+                    break;
+        }
+        //StartDeathSequence();
 
         //Set explosion animation to visible on the screen
         PlayerDeathFX.SetActive(true);
@@ -32,5 +44,9 @@ public class CollisionHandler : MonoBehaviour {
     private void callSceneLoader() {
         //Calls Scene Loader function
         SendMessage("ReloadScene");
+    }
+    
+    void FriendlyCollisions(){
+        
     }
 }
