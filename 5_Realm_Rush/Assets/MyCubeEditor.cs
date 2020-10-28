@@ -17,7 +17,6 @@ public class MyCubeEditor : MonoBehaviour {
     void Update() {
 
         Vector3 SnapPos;
-
         // Round the x position to 1 and multiply by 10 so it snaps through the script instead of the editor
         //Snap everything to grid by 10
         SnapPos.x = Mathf.RoundToInt(transform.position.x / GridSize) * GridSize;
@@ -26,6 +25,9 @@ public class MyCubeEditor : MonoBehaviour {
 
         //Grab the text component in child of cube and set it to positions "x,y"
         textMesh = GetComponentInChildren<TextMesh>();
-        textMesh.text = SnapPos.x / GridSize + "," + SnapPos.z / GridSize;
+        string LabelText = SnapPos.x / GridSize + "," + SnapPos.z / GridSize;
+        textMesh.text = LabelText;
+        //Change heirarchy cube object names to current positions
+        gameObject.name = LabelText;
     }
 }
