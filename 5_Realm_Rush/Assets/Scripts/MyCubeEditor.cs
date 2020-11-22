@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Waypoint))]
 public class MyCubeEditor : MonoBehaviour {
     
+   
     //[SerializeField] [Range(1f, 20f)] const float GridSize = 10;
     //Vector3 SnapToGridPos;
     Waypoint waypoint;
@@ -31,14 +32,17 @@ public class MyCubeEditor : MonoBehaviour {
         int GridSize = waypoint.GetGridSize();
         
         //Move to grid positions from waypoint script in GetGridPos funciton
-        transform.position = new Vector3(waypoint.GetGridPos().x, 0f, waypoint.GetGridPos().y);
+        transform.position = new Vector3(
+            waypoint.GetGridPos().x * GridSize,
+            0f,
+            waypoint.GetGridPos().y* GridSize);
     }
 
     private void UpdateLabel() {
         int GridSize = waypoint.GetGridSize();
          //Grab the text component in child of cube and set it to positions "x,y"
         TextMesh textMesh = GetComponentInChildren<TextMesh>();
-        string LabelText = waypoint.GetGridPos().x / GridSize + "," + waypoint.GetGridPos().y / GridSize;
+        string LabelText = waypoint.GetGridPos().x + "," + waypoint.GetGridPos().y;
         textMesh.text = LabelText;
         //Change heirarchy cube object names to current positions
         gameObject.name = LabelText;
