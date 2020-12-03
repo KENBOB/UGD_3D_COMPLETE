@@ -25,11 +25,18 @@ public class Pathfinder : MonoBehaviour {
     //Provide a simple way of getting the path for the enemy
     //Load all functions and send to enemy in start method
     public List<Waypoint> GetPath() {
+        if (path.Count == 0) {
+            CalculatePath();
+        }
+        return path;
+    }
+
+    //Calculate the path for the list
+    private void CalculatePath() {
         LoadBlocks();
         ColorStartAndEnd();
         BreadthFirstSearch();
         CreatePath();
-        return path;
     }
 
     //Make the path starting from the end goal and reverse the path
@@ -55,18 +62,18 @@ public class Pathfinder : MonoBehaviour {
         while(queue.Count > 0 && isRunning) {
             //Remove the parent from search queue
             searchCenter = queue.Dequeue();
-            print("Searching from: " + searchCenter);
+            // print("Searching from: " + searchCenter);
             HaltIfEndFound();
             ExploreNeighbors();
             searchCenter.isExplored = true;
         }
-        print("Finished pathfinding?");
+        // print("Finished pathfinding?");
     }
 
     //Notifies the end has been reached
     private void HaltIfEndFound() {
         if(searchCenter == endWaypoint) {
-            print("Searching from end node, therefore stopping.");
+            // print("Searching from end node, therefore stopping.");
             isRunning = false;
         }
     }
@@ -95,7 +102,7 @@ public class Pathfinder : MonoBehaviour {
             //do nothing
         } else {
             queue.Enqueue(neighbor);
-            print("Queueing " + neighbor);
+            // print("Queueing " + neighbor);
             neighbor.ExploredFrom = searchCenter;
         }
     }

@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour {
             //print("Visiting block: " + waypoint.name);
 
             //Pause there for x seconds 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
         }
         print("Ending Patrol.");
     }
