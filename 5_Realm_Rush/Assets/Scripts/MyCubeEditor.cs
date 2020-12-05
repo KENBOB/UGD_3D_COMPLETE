@@ -12,6 +12,7 @@ public class MyCubeEditor : MonoBehaviour {
     //Vector3 SnapToGridPos;
     Waypoint waypoint;
 
+    //Grab waypoint component on awake
     private void Awake() {
         waypoint = GetComponent<Waypoint>();
     }
@@ -26,6 +27,7 @@ public class MyCubeEditor : MonoBehaviour {
         UpdateLabel();
     }
 
+    //Snap blocks to grid without having to hold downt the ctrl key
     private void SnapToGrid() {
         
         // Grab grid size from way point connected to grid size function in wp script
@@ -38,6 +40,7 @@ public class MyCubeEditor : MonoBehaviour {
             waypoint.GetGridPos().y* GridSize);
     }
 
+    //Update the grid number mesh labels (x,x) when moving blocks on the grid
     private void UpdateLabel() {
         int GridSize = waypoint.GetGridSize();
          //Grab the text component in child of cube and set it to positions "x,y"

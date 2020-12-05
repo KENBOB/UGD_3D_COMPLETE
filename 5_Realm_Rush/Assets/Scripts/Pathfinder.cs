@@ -8,13 +8,13 @@ public class Pathfinder : MonoBehaviour {
     [SerializeField] Waypoint startWaypoint = null, endWaypoint = null;
 
     Dictionary<Vector2Int, Waypoint> grid = new Dictionary<Vector2Int, Waypoint>();
-    //List
-    Queue<Waypoint> queue = new Queue<Waypoint>();
+    Queue<Waypoint> queue = new Queue<Waypoint>();  //List
     bool isRunning = true;
     Waypoint searchCenter = null; //Current searchCenter
-    // new list waypoint creates it in the inspector to alter if needed
+    //New list waypoint creates it in the inspector to alter if needed
     List<Waypoint> path = new List<Waypoint>();
 
+    //Grab the corresponding adjacent directions when searching for path
     Vector2Int[] directions = {
         Vector2Int.up,
         Vector2Int.right,
@@ -41,18 +41,27 @@ public class Pathfinder : MonoBehaviour {
 
     //Make the path starting from the end goal and reverse the path
     private void CreatePath() {
-        path.Add(endWaypoint);
+        SetAsPath(endWaypoint); //Cannot place tower on end waypoint
+        
         Waypoint previous = endWaypoint.ExploredFrom;
         while(previous != startWaypoint) {
-            //add intermediate waypoints
-            path.Add(previous);
+            //add intermediate waypoints and set to non-placeable
+            
+            SetAsPath(previous);
+            
             //update the new previous node
             previous = previous.ExploredFrom;
         }
-        //add start waypoint
-        path.Add(startWaypoint);
+        //add start waypoint and set to non-placeable
+        SetAsPath(startWaypoint);
+        
         //reverse the list
         path.Reverse();
+    }
+
+    private void SetAsPath(Waypoint waypoint) {
+        path.Add(waypoint);
+        waypoint.isPlaceable = false;
     }
 
     //Searches for the path and requests check for end node

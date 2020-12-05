@@ -14,7 +14,7 @@ public class EnemyDamage : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        print("I'm hit!");
+        // print("I'm hit!");
         ProcessHit();
         if(hitPoints <= 0) {
             KillEnemy();
