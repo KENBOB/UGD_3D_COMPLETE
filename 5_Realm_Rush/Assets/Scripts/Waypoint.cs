@@ -5,12 +5,17 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour {
     
     [SerializeField] Color ExploredColor;
+    
 
     //Public ok here as it is a data class
     public bool isExplored = false;
     public Waypoint ExploredFrom;
     public Waypoint neighbor;
     public bool isPlaceable = true;
+
+    
+    // [SerializeField] float secondsBetweenTowerSpawn = 2f;
+    bool hasTower = false;
 
     Vector2Int gridPos;
     const int GridSize = 10;
@@ -55,11 +60,14 @@ public class Waypoint : MonoBehaviour {
     void OnMouseOver() {
         
         if (Input.GetMouseButtonDown(0)) {
-            if (isPlaceable) {
+            if (isPlaceable && !hasTower) {
                 print("Clicked on " + gameObject.name + (" block."));
+                FindObjectOfType<TowerFactory>().PlaceTower(this);
             } else {
                 print("Can't place tower on " + gameObject.name);
             }
         }
     }
+
+    
 }

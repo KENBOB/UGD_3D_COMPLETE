@@ -6,8 +6,12 @@ public class Tower : MonoBehaviour
 {
     //Parameters of each tower
     [SerializeField] Transform objectToPan = null;
+    // public Vector3 TowerOffset = new Vector3( -4.5, 3, 4.5 );
+
     [SerializeField] float attackRange = 10f;
     [SerializeField] ParticleSystem projectileParticle = null;
+
+    public Waypoint baseWaypoint;   //what the tower is standing on
 
     //State of each tower
     Transform targetEnemy = null;
@@ -17,7 +21,7 @@ public class Tower : MonoBehaviour
     {
         SetTartgetEnemy();
         if(targetEnemy) {
-            objectToPan.LookAt(targetEnemy);
+            objectToPan.LookAt(targetEnemy.transform);
             FireAtEnemy();
         } else {
             Shoot(false);
